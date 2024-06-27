@@ -1,0 +1,47 @@
+.control-panel {
+    background-color: #e6f3e6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .control-panel button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .control-panel button:hover {
+    background-color: #45a049;
+  }
+  
+  .control-panel button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .environmental-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .environmental-controls label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .environmental-controls input[type="range"] {
+    width: 60%;
+  }
