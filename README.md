@@ -1,5 +1,8 @@
 # Virtual Plant Evolution Simulator
 
+![image](https://github.com/Andres10976/virtual-plant-evolution-simulator/assets/44916243/1f1fa6ce-f6f0-4573-acca-0f2c41beb60a)
+
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -155,20 +158,6 @@ npm test
 
 This will run the Jest test suite, which includes unit tests for plant logic and API endpoint tests.
 
-## Deployment
-
-For deployment instructions, please refer to the [Deployment Guide](deployment.md).
-
-## Contributing
-
-We welcome contributions to the Virtual Plant Evolution Simulator! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
-- Special thanks to all contributors and beta testers
-- Inspired by real-world plant genetics and evolutionary biology concepts
 - Built with love for science education and interactive simulations
