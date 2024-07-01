@@ -1,7 +1,6 @@
 # Virtual Plant Evolution Simulator
 
-![image](https://github.com/Andres10976/virtual-plant-evolution-simulator/assets/44916243/1f1fa6ce-f6f0-4573-acca-0f2c41beb60a)
-
+![image](https://github.com/Andres10976/virtual-plant-evolution-simulator/assets/44916243/97b5b0a0-b67c-427a-afed-ea3651270ece)
 
 ## Table of Contents
 
