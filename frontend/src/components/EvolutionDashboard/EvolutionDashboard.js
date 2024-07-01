@@ -1,28 +1,46 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import './EvolutionDashboard.css';
+import React from "react";
+import { usePlantSimulator } from "../../PlantSimulatorContext";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import "./EvolutionDashboard.css";
 
 const EvolutionDashboard = () => {
-  const plants = useSelector(state => state.plants.plants);
+  const { state } = usePlantSimulator();
+  const { plants } = state;
 
-  const averageHeight = plants.reduce((sum, plant) => sum + plant.genome.height, 0) / plants.length;
-  const averageResiliency = plants.reduce((sum, plant) => sum + plant.genome.resiliency, 0) / plants.length;
+  const averageHeight =
+    plants.reduce((sum, plant) => sum + plant.genome.height, 0) / plants.length;
+  const averageResiliency =
+    plants.reduce((sum, plant) => sum + plant.genome.resiliency, 0) /
+    plants.length;
 
   const generationData = plants.reduce((acc, plant) => {
-    if (!acc[plant.generation]) {
-      acc[plant.generation] = { generation: plant.generation, avgHeight: 0, avgResiliency: 0, count: 0 };
+    if (!acc[plant.genome.generation]) {
+      acc[plant.genome.generation] = {
+        generation: plant.genome.generation,
+        avgHeight: 0,
+        avgResiliency: 0,
+        count: 0,
+      };
     }
-    acc[plant.generation].avgHeight += plant.genome.height;
-    acc[plant.generation].avgResiliency += plant.genome.resiliency;
-    acc[plant.generation].count++;
+    acc[plant.genome.generation].avgHeight += plant.genome.height;
+    acc[plant.genome.generation].avgResiliency += plant.genome.resiliency;
+    acc[plant.genome.generation].count++;
     return acc;
   }, {});
 
-  const chartData = Object.values(generationData).map(gen => ({
+  const chartData = Object.values(generationData).map((gen) => ({
     generation: gen.generation,
     avgHeight: gen.avgHeight / gen.count,
-    avgResiliency: gen.avgResiliency / gen.count
+    avgResiliency: gen.avgResiliency / gen.count,
   }));
 
   return (
@@ -45,16 +63,26 @@ const EvolutionDashboard = () => {
       <div className="chart">
         <h3>Trait Evolution Over Generations</h3>
         <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="generation" allowDecimals={false} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="avgHeight" stroke="#8884d8" name="Avg Height" />
-          <Line type="monotone" dataKey="avgResiliency" stroke="#82ca9d" name="Avg Resiliency" />
-        </LineChart>
-      </ResponsiveContainer>
+          <LineChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="generation" allowDecimals={false} />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="avgHeight"
+              stroke="#8884d8"
+              name="Avg Height"
+            />
+            <Line
+              type="monotone"
+              dataKey="avgResiliency"
+              stroke="#82ca9d"
+              name="Avg Resiliency"
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

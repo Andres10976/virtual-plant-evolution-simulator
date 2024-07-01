@@ -1,8 +1,10 @@
-import React from 'react';
-import './Plant.css';
+// Plant.js
+import React, { useState } from "react";
+import "./Plant.css";
 
-const Plant = ({ plant }) => {
-  const { genome, growthStage } = plant;
+const Plant = ({ plant, isSelected }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { id, genome, growthStage } = plant;
   const { height, leafShape, flowerColor, resiliency } = genome;
 
   const plantStyle = {
@@ -16,7 +18,8 @@ const Plant = ({ plant }) => {
   };
 
   const leafStyle = {
-    borderRadius: leafShape === 'round' ? '50%' : leafShape === 'oval' ? '40%' : '0',
+    borderRadius:
+      leafShape === "round" ? "50%" : leafShape === "oval" ? "40%" : "0",
   };
 
   const flowerStyle = {
@@ -24,16 +27,27 @@ const Plant = ({ plant }) => {
   };
 
   return (
-    <div className={`plant growth-${Math.floor(growthStage / 10)}`} style={plantStyle}>
+    <div
+      className={`plant growth-${Math.floor(growthStage / 10)} ${
+        isSelected ? "selected" : ""
+      }`}
+      style={plantStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="stem" style={stemStyle}></div>
       <div className="leaf left" style={leafStyle}></div>
       <div className="leaf right" style={leafStyle}></div>
       <div className="flower" style={flowerStyle}></div>
-      <div className="info">
-        <p>Height: {height}</p>
-        <p>Resiliency: {resiliency}</p>
-        <p>Growth: {growthStage}%</p>
-      </div>
+      {isHovered && (
+        <div className="info">
+          <p>Plant {id.toString().slice(-4)}</p>
+          <p>
+            H: {height.toFixed(1)} R: {resiliency.toFixed(1)}
+          </p>
+          <p>Growth: {growthStage}%</p>
+        </div>
+      )}
     </div>
   );
 };

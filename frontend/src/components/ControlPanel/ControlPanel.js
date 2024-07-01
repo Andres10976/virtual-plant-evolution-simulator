@@ -1,135 +1,139 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// ControlPanel.js
+import React from "react";
+import { usePlantSimulator } from "../../PlantSimulatorContext";
 import {
-  createPlant,
-  growPlant,
-  breedPlants,
-  updateEnvironment,
-} from "../../redux/plantsSlice";
+  FaSeedling,
+  FaLeaf,
+  FaDna,
+  FaThermometerHalf,
+  FaTint,
+  FaMountain,
+  FaSun,
+} from "react-icons/fa";
+import "./ControlPanel.css";
 
 const ControlPanel = () => {
-  const dispatch = useDispatch();
-  const plants = useSelector((state) => state.plants.plants);
-  const environment = useSelector((state) => state.plants.environmentalFactors);
-  const [selectedPlants, setSelectedPlants] = useState([]);
+  const {
+    state,
+    createPlant,
+    growPlants,
+    breedPlants,
+    updateEnvironment,
+    selectPlant,
+    deselectPlant,
+  } = usePlantSimulator();
 
-  const handleCreatePlant = () => {
-    dispatch(createPlant());
-  };
+  const { plants, environmentalFactors, selectedPlants } = state;
 
-  const handleGrowPlants = () => {
-    plants.forEach((plant) => dispatch(growPlant(plant._id)));
-  };
-
-  const handleBreedPlants = () => {
-    if (selectedPlants.length === 2) {
-      dispatch(
-        breedPlants({
-          plant1Id: selectedPlants[0],
-          plant2Id: selectedPlants[1],
-        })
-      );
-      setSelectedPlants([]);
+  const handlePlantSelection = (plantId) => {
+    if (selectedPlants.includes(plantId)) {
+      deselectPlant(plantId);
+    } else {
+      selectPlant(plantId);
     }
   };
 
-  const handlePlantSelection = (plantId) => {
-    setSelectedPlants((prev) => {
-      if (prev.includes(plantId)) {
-        return prev.filter((id) => id !== plantId);
-      } else if (prev.length < 2) {
-        return [...prev, plantId];
-      }
-      return prev;
-    });
-  };
-
   const handleEnvironmentChange = (factor, value) => {
-    dispatch(updateEnvironment({ [factor]: parseFloat(value) }));
+    updateEnvironment(factor, parseFloat(value));
   };
 
   return (
     <div className="control-panel">
-      <h2>Control Panel</h2>
-      <button onClick={handleCreatePlant}>Create New Plant</button>
-      <button onClick={handleGrowPlants}>Grow All Plants</button>
-      <button
-        onClick={handleBreedPlants}
-        disabled={selectedPlants.length !== 2}
-      >
-        Breed Selected Plants
-      </button>
-      <div>
-        <h3>Select Plants for Breeding:</h3>
-        {plants.map((plant) => (
-          <button
-            key={plant._id}
-            onClick={() => handlePlantSelection(plant._id)}
-            style={{
-              backgroundColor: selectedPlants.includes(plant._id)
-                ? "lightblue"
-                : "white",
-            }}
-          >
-            Plant {plant._id}
-          </button>
-        ))}
+      <h2 className="control-panel-title">Control Panel</h2>
+      <div className="control-panel-actions">
+        <button className="action-button create" onClick={createPlant}>
+          <FaSeedling /> Create New Plant
+        </button>
+        <button className="action-button grow" onClick={growPlants}>
+          <FaLeaf /> Grow All Plants
+        </button>
+        <button
+          className="action-button breed"
+          onClick={breedPlants}
+          disabled={selectedPlants.length !== 2}
+        >
+          <FaDna /> Breed Selected Plants
+        </button>
       </div>
-      <div>
+      <div className="plant-selection">
+        <h3>Select Plants for Breeding:</h3>
+        <div className="plant-grid">
+          {plants.map((plant) => (
+            <button
+              key={plant.id}
+              onClick={() => handlePlantSelection(plant.id)}
+              className={`plant-button ${
+                selectedPlants.includes(plant.id) ? "selected" : ""
+              }`}
+            >
+              Plant {plant.id.toString().slice(-4)}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="environmental-controls">
         <h3>Environmental Controls:</h3>
-        <label>
-          Temperature:
-          <input
-            type="range"
-            min="0"
-            max="50"
-            value={environment.temperature}
-            onChange={(e) =>
-              handleEnvironmentChange("temperature", e.target.value)
-            }
-          />
-          {environment.temperature}°C
-        </label>
-        <label>
-          Rainfall:
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={environment.rainfall}
-            onChange={(e) =>
-              handleEnvironmentChange("rainfall", e.target.value)
-            }
-          />
-          {environment.rainfall}mm
-        </label>
-        <label>
-          Soil Quality:
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={environment.soilQuality}
-            onChange={(e) =>
-              handleEnvironmentChange("soilQuality", e.target.value)
-            }
-          />
-          {environment.soilQuality}
-        </label>
-        <label>
-          Sunlight:
-          <input
-            type="range"
-            min="0"
-            max="24"
-            value={environment.sunlight}
-            onChange={(e) =>
-              handleEnvironmentChange("sunlight", e.target.value)
-            }
-          />
-          {environment.sunlight} hours
-        </label>
+        <div className="slider-container">
+          <label>
+            <FaThermometerHalf /> Temperature:
+            <input
+              type="range"
+              min="0"
+              max="50"
+              value={environmentalFactors.temperature}
+              onChange={(e) =>
+                handleEnvironmentChange("temperature", e.target.value)
+              }
+            />
+            <span>{environmentalFactors.temperature}°C</span>
+          </label>
+        </div>
+        <div className="slider-container">
+          <label>
+            <FaTint /> Rainfall:
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={environmentalFactors.rainfall}
+              onChange={(e) =>
+                handleEnvironmentChange("rainfall", e.target.value)
+              }
+            />
+            <span>{environmentalFactors.rainfall}mm</span>
+          </label>
+        </div>
+        <div className="slider-container">
+          <label>
+            <FaMountain /> Soil Quality:
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={environmentalFactors.soilQuality}
+              onChange={(e) =>
+                handleEnvironmentChange("soilQuality", e.target.value)
+              }
+            />
+            <span>{environmentalFactors.soilQuality.toFixed(1)}</span>
+          </label>
+        </div>
+        <div className="slider-container">
+          <label>
+            <FaSun /> Sunlight:
+            <input
+              type="range"
+              min="0"
+              max="24"
+              value={environmentalFactors.sunlight}
+              onChange={(e) =>
+                handleEnvironmentChange("sunlight", e.target.value)
+              }
+            />
+            <span>{environmentalFactors.sunlight} hours</span>
+          </label>
+        </div>
       </div>
     </div>
   );

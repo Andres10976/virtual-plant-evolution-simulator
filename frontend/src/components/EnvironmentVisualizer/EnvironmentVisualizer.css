@@ -1,101 +1,129 @@
 .environment-visualizer {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.sky {
+  width: 100%;
+  height: 70%;
+  position: relative;
+  transition: background-color 2s ease;
+}
+
+.sun {
+  width: 60px;
+  height: 60px;
+  background-color: yellow;
+  border-radius: 50%;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+  transition: transform 2s ease;
+}
+
+.clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 2s ease;
+}
+
+.cloud {
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.8;
+}
+
+.cloud:nth-child(1) {
+  width: 100px;
+  height: 40px;
+  top: 30px;
+  left: 20%;
+  animation: float 20s infinite alternate;
+}
+
+.cloud:nth-child(2) {
+  width: 80px;
+  height: 30px;
+  top: 50px;
+  left: 50%;
+  animation: float 15s infinite alternate-reverse;
+}
+
+.cloud:nth-child(3) {
+  width: 120px;
+  height: 50px;
+  top: 20px;
+  left: 70%;
+  animation: float 25s infinite alternate;
+}
+
+.ground {
+  width: 100%;
+  height: 30%;
+  position: relative;
+  transition: background-color 2s ease;
+}
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background-color: rgba(30, 144, 255, 0.6);
+  top: -20px;
+  animation: rain 1s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(0);
   }
-  
-  .sky {
-    width: 100%;
-    height: 70%;
-    position: relative;
-    transition: background-color 2s ease;
+  100% {
+    transform: translateX(50px);
   }
-  
-  .sun {
-    width: 60px;
-    height: 60px;
-    background-color: yellow;
-    border-radius: 50%;
-    position: absolute;
-    right: 40px;
-    top: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
-    transition: transform 2s ease;
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(0);
   }
-  
-  .clouds {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: opacity 2s ease;
+  100% {
+    transform: translateY(200px);
   }
-  
-  .cloud {
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    opacity: 0.8;
-  }
-  
-  .cloud:nth-child(1) {
-    width: 100px;
-    height: 40px;
-    top: 30px;
-    left: 20%;
-    animation: float 20s infinite alternate;
-  }
-  
-  .cloud:nth-child(2) {
-    width: 80px;
-    height: 30px;
-    top: 50px;
-    left: 50%;
-    animation: float 15s infinite alternate-reverse;
-  }
-  
-  .cloud:nth-child(3) {
-    width: 120px;
-    height: 50px;
-    top: 20px;
-    left: 70%;
-    animation: float 25s infinite alternate;
-  }
-  
-  .ground {
-    width: 100%;
-    height: 30%;
-    position: relative;
-    transition: background-color 2s ease;
-  }
-  
-  .raindrop {
-    position: absolute;
-    width: 2px;
-    height: 20px;
-    background-color: rgba(30, 144, 255, 0.6);
-    top: -20px;
-    animation: rain 1s linear infinite;
-  }
-  
-  @keyframes float {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(50px); }
-  }
-  
-  @keyframes rain {
-    0% { transform: translateY(0) }
-    100% { transform: translateY(200px) }
-  }
-  
-  .raindrop:nth-child(1) { left: 10%; }
-  .raindrop:nth-child(2) { left: 20%; }
-  .raindrop:nth-child(3) { left: 30%; }
-  .raindrop:nth-child(4) { left: 40%; }
-  .raindrop:nth-child(5) { left: 50%; }
-  .raindrop:nth-child(6) { left: 60%; }
-  .raindrop:nth-child(7) { left: 70%; }
-  .raindrop:nth-child(8) { left: 80%; }
-  .raindrop:nth-child(9) { left: 90%; }
-  .raindrop:nth-child(10) { left: 95%; }
+}
+
+.raindrop:nth-child(1) {
+  left: 10%;
+}
+.raindrop:nth-child(2) {
+  left: 20%;
+}
+.raindrop:nth-child(3) {
+  left: 30%;
+}
+.raindrop:nth-child(4) {
+  left: 40%;
+}
+.raindrop:nth-child(5) {
+  left: 50%;
+}
+.raindrop:nth-child(6) {
+  left: 60%;
+}
+.raindrop:nth-child(7) {
+  left: 70%;
+}
+.raindrop:nth-child(8) {
+  left: 80%;
+}
+.raindrop:nth-child(9) {
+  left: 90%;
+}
+.raindrop:nth-child(10) {
+  left: 95%;
+}

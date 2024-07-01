@@ -1,22 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Plant from './Plant';
+import React from "react";
+import { usePlantSimulator } from "../../PlantSimulatorContext";
+import Plant from "./Plant";
+import "./PlantVisualization.css";
 
 const PlantVisualization = () => {
-  const plants = useSelector(state => state.plants.plants);
-  const selectedPlant = useSelector(state => state.plants.selectedPlant);
+  const { state } = usePlantSimulator();
+  const { plants, selectedPlants } = state;
 
   return (
     <div className="plant-visualization">
       <h2>Plant Visualization</h2>
-      <div className="plant-container">
-        {selectedPlant ? (
-          <Plant plant={selectedPlant} />
-        ) : (
-          plants.map(plant => (
-            <Plant key={plant._id} plant={plant} />
-          ))
-        )}
+      <div className="plant-grid">
+        {plants.map((plant) => (
+          <div className="plant-container" key={plant.id}>
+            <Plant
+              plant={plant}
+              isSelected={selectedPlants.includes(plant.id)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

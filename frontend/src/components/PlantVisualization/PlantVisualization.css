@@ -1,31 +1,24 @@
 .plant-visualization {
-    background-color: #f0f8ff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .plant-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .plant {
-    background-color: #e6f3e6;
-    border-radius: 10px;
-    padding: 10px;
-    transition: all 0.3s ease;
-  }
-  
-  .plant:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .plant .info {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #333;
-  }
+  background-color: #e6f3e6;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.plant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  overflow: hidden;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.plant-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 120px;
+}

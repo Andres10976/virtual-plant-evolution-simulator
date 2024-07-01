@@ -1,137 +1,117 @@
 .plant {
-    position: relative;
-    margin: 10px;
-    display: inline-block;
-    animation: sway 5s ease-in-out infinite alternate;
+  position: relative;
+  display: inline-block;
+  animation: sway 5s ease-in-out infinite alternate;
 }
 
 .stem {
-    width: 10px;
-    background-color: brown;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: height 0.5s ease;
+  width: 10px;
+  background-color: brown;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: height 0.5s ease;
 }
 
 .leaf {
-    width: 30px;
-    height: 20px;
-    background-color: green;
-    position: absolute;
-    top: 30%;
-    transition: all 0.5s ease;
+  width: 30px;
+  height: 20px;
+  background-color: green;
+  position: absolute;
+  top: 30%;
+  transition: all 0.5s ease;
 }
 
 .leaf.left {
-    left: -20px;
-    transform: rotate(-30deg);
+  left: -20px;
+  transform: rotate(-30deg);
 }
 
 .leaf.right {
-    right: -20px;
-    transform: rotate(30deg);
+  right: -20px;
+  transform: rotate(30deg);
 }
 
 .flower {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.5s ease;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s ease;
 }
 
 .info {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-size: 0.8em;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.info p {
+  margin: 2px 0;
 }
 
 @keyframes sway {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(5deg);
-    }
-}
-
-.growth-0 {
-    opacity: 0.2;
-}
-
-.growth-1 {
-    opacity: 0.4;
-}
-
-.growth-2 {
-    opacity: 0.6;
-}
-
-.growth-3 {
-    opacity: 0.8;
-}
-
-.growth-4,
-.growth-5,
-.growth-6,
-.growth-7,
-.growth-8,
-.growth-9,
-.growth-10 {
-    opacity: 1;
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
 }
 
 .growth-0 .stem {
-    height: 20% !important;
+  height: 20% !important;
 }
 
 .growth-1 .stem {
-    height: 40% !important;
+  height: 40% !important;
 }
 
 .growth-2 .stem {
-    height: 60% !important;
+  height: 60% !important;
 }
 
 .growth-3 .stem {
-    height: 80% !important;
+  height: 80% !important;
 }
 
 .growth-0 .leaf {
-    transform: scale(0.2);
+  transform: scale(0.2);
 }
 
 .growth-1 .leaf {
-    transform: scale(0.4);
+  transform: scale(0.4);
 }
 
 .growth-2 .leaf {
-    transform: scale(0.6);
+  transform: scale(0.6);
 }
 
 .growth-3 .leaf {
-    transform: scale(0.8);
+  transform: scale(0.8);
 }
 
 .growth-0 .flower,
 .growth-1 .flower,
 .growth-2 .flower {
-    transform: scale(0);
-    opacity: 0;
+  transform: scale(0);
 }
 
 .growth-3 .flower {
-    transform: scale(0.5) translateX(-50%);
-    opacity: 0.5;
+  transform: scale(0.5) translateX(-50%);
 }
 
 .growth-4 .flower,
@@ -141,27 +121,21 @@
 .growth-8 .flower,
 .growth-9 .flower,
 .growth-10 .flower {
-    transform: scale(1) translateX(-50%);
-    opacity: 1;
+  transform: scale(1) translateX(-50%);
 }
 
 @keyframes bloom {
-    0% {
-        transform: scale(0) translateX(-50%);
-        opacity: 0;
-    }
-
-    50% {
-        transform: scale(1.2) translateX(-50%);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1) translateX(-50%);
-        opacity: 1;
-    }
+  0% {
+    transform: scale(0) translateX(-50%);
+  }
+  50% {
+    transform: scale(1.2) translateX(-50%);
+  }
+  100% {
+    transform: scale(1) translateX(-50%);
+  }
 }
 
 .growth-3 .flower {
-    animation: bloom 2s ease-out;
+  animation: bloom 2s ease-out;
 }
